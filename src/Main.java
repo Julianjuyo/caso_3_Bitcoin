@@ -43,8 +43,8 @@ public class Main {
             if(cadena.length()>32){
                 throw new Exception("Error la cadena tiene mas de 32 caracteres");
             }
-            //String pathNuevoArchvio ="home/ubuntu/caso_3_Bitcoin/docs/Pruebas-"+algoritmo+"-conCadena-"+cadena+".txt";
-            String pathNuevoArchvio ="/Users/julianoliveros/Desktop/Pruebas-"+algoritmo+"-conCadena-"+cadena+".txt";
+            String pathNuevoArchvio ="home/ubuntu/caso_3_Bitcoin/docs/Pruebas-"+algoritmo+"-conCadena-"+cadena+".txt";
+            //String pathNuevoArchvio ="/Users/julianoliveros/Desktop/Pruebas-"+algoritmo+"-conCadena-"+cadena+".txt";
 
 
             BufferedWriter bw = new BufferedWriter(new FileWriter(pathNuevoArchvio));
@@ -54,15 +54,15 @@ public class Main {
             System.out.println("\nEl algoritmo usado es: " + algoritmo + "\n");
 
 
-            escribirEnArchvio(4,  cadena,  bw,  algoritmo);
-
-            escribirEnArchvio(8,  cadena,  bw,  algoritmo);
-
-            escribirEnArchvio(12,  cadena,  bw,  algoritmo);
-
-            escribirEnArchvio(16,  cadena,  bw,  algoritmo);
-
             escribirEnArchvio(20,  cadena,  bw,  algoritmo);
+
+            escribirEnArchvio(24,  cadena,  bw,  algoritmo);
+
+            escribirEnArchvio(28,  cadena,  bw,  algoritmo);
+
+            escribirEnArchvio(32,  cadena,  bw,  algoritmo);
+
+            escribirEnArchvio(36,  cadena,  bw,  algoritmo);
 
             bw.close();
 
