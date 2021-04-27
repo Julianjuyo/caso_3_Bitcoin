@@ -1,12 +1,30 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("\n"+"Por favor ingrese el algoritmo que desea utilizar (SHA-512 o SHA-256), la cantidad de ceros que desea que tenga al comienzo el hash que se buscará y la cadena inicial con la que se hará la prueba");
+
+    public static void escribirEnArchvio(int cantidadDeCeros, String cadena, BufferedWriter bw, String algoritmo){
+        try {
+            long startTime = System.currentTimeMillis();
+            System.out.println("Prueba con "+cantidadDeCeros+" ceros");
+            bw.write("\n"+"Prueba con "+cantidadDeCeros+" ceros"+"\n");
+            String v = new Buscador(new Hash(algoritmo), bw).buscarCombinacionParaQueElHashCumplaLaCondicion(cantidadDeCeros, cadena);
+            long endTime = System.currentTimeMillis() - startTime;
+            System.out.println("La cadena (v) encontrada es: " + v);
+            System.out.println("Se tardó: "+ endTime +" minutos"+"\n");
+            bw.write("La cadena (v) encontrada es: " + v + "\n");
+            bw.write("Se tardó: "+ endTime +" milisegundos"+"\n");
+            System.out.println("------------------------------------------------------------------------");
+            bw.write("------------------------------------------------------------------------");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.out.println("\n"+"Por favor ingrese el algoritmo que desea utilizar (SHA-512 o SHA-256) y la cadena inicial con la que se hará la prueba con maximo 32 caracteres");
         System.out.println("Los datos deben ser ingresados separados por comas");
-        System.out.println("Por ejemplo: SHA-512,24,esta es la cadena inicial");
+        System.out.println("Por ejemplo: SHA-512,esta es la cadena inicial");
         InputStreamReader is= new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(is);
 
@@ -16,22 +34,41 @@ public class Main {
             String[] split = line.split(",");
 
             String algoritmo = split[0];
-            int cantidadDeCeros = Integer.parseInt(split[1]);
-            String cadena = split[2];
+            String cadena = split[1];
+
+            if(!(algoritmo.equals("SHA-256")||algoritmo.equals("SHA-512"))){
+                throw new Exception("El algoritmo ingresado no es válido");
+            }
+
+            if(cadena.length()>32){
+                throw new Exception("Error la cadena tiene mas de 32 caracteres");
+            }
+            //String pathNuevoArchvio ="home/ubuntu/caso_3_Bitcoin/docs/Pruebas-"+algoritmo+"-conCadena-"+cadena+".txt";
+            String pathNuevoArchvio ="/Users/julianoliveros/Desktop/Pruebas-"+algoritmo+"-conCadena-"+cadena+".txt";
 
 
-            long startTime = System.currentTimeMillis();
-            String v = new Buscador(new Hash(algoritmo)).buscarCombinacionParaQueElHashCumplaLaCondicion(cantidadDeCeros, cadena);
-            long endTime = System.currentTimeMillis() - startTime;
-            endTime= (endTime/60000);
-            System.out.println("La cadena (v) encontrada es: " + v);
-            System.out.println("La cadena usada es: " + cadena);
-            System.out.println("Se tardó: "+ endTime +" minutos"+"\n");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(pathNuevoArchvio));
+            bw.write("\n" +"La cadena usada es: " + cadena + "\n");
+            System.out.println("\n" +"La cadena usada es: " + cadena + "\n");
+            bw.write("\nEl algoritmo usado es: " + algoritmo + "\n");
+            System.out.println("\nEl algoritmo usado es: " + algoritmo + "\n");
 
-            
+
+            escribirEnArchvio(4,  cadena,  bw,  algoritmo);
+
+            escribirEnArchvio(8,  cadena,  bw,  algoritmo);
+
+            escribirEnArchvio(12,  cadena,  bw,  algoritmo);
+
+            escribirEnArchvio(16,  cadena,  bw,  algoritmo);
+
+            escribirEnArchvio(20,  cadena,  bw,  algoritmo);
+
+            bw.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }

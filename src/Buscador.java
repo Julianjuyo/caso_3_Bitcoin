@@ -1,9 +1,13 @@
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.Vector;
 public class Buscador {
     private Hash hash;
+    private BufferedWriter bw;
 
-    public Buscador(Hash hash){
+    public Buscador(Hash hash, BufferedWriter bw){
         this.hash = hash;
+        this.bw = bw;
     }
 
     /**
@@ -17,9 +21,11 @@ public class Buscador {
     public String buscarCombinacionParaQueElHashCumplaLaCondicion(int cantidadDeCeros, String cadenaInicial){
 
         String ceros = "";
+        String cerosMasUno = "0";
 
         for(int i = 0; i < cantidadDeCeros/4; i++){
             ceros += "0";
+            cerosMasUno += "0";
         }
 
         //TODO Esta lista debe ser el abecedario completo. Está con 4 caracteres para poder hacer pruebas
@@ -31,8 +37,13 @@ public class Buscador {
         {
             String hashActual = hash.calcularHash(cadenaInicial+combinacionesEncontradasDeTamañoEspecifico[i]);
 
-            if(hashActual.startsWith(ceros)){
+            if(hashActual.startsWith(ceros) && !hashActual.startsWith(cerosMasUno)){
                 System.out.println("El hash encontrado que cumple la condición es: " + hashActual);
+                try{
+                    bw.write("El hash encontrado que cumple la condición es: " + hashActual + "\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 return combinacionesEncontradasDeTamañoEspecifico[i];
             }
         }
@@ -54,8 +65,13 @@ public class Buscador {
                     String cadenaConcatenada = cadenaInicial + nuevaCombinacion;
                     String hashActual = hash.calcularHash(cadenaConcatenada);
                     //System.out.println(hashActual);
-                    if (hashActual.startsWith(ceros)) {
+                    if (hashActual.startsWith(ceros) && !hashActual.startsWith(cerosMasUno)) {
                         System.out.println("El hash encontrado que cumple la condición es: " + hashActual);
+                        try{
+                            bw.write("El hash encontrado que cumple la condición es: " + hashActual + "\n");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         return nuevaCombinacion;
                     }
                     vectorTemporal.add(nuevaCombinacion);
