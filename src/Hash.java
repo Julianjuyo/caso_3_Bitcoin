@@ -17,7 +17,8 @@ public class Hash {
 
     public String calcularHash(String PTextoACifrar) {
         int caracteres;
-        if (PTextoACifrar.equals("SHA-256"))
+
+        if (algoritmoHashImplementado.equals("SHA-256"))
             caracteres = 64;
         else
             caracteres = 128;
@@ -39,6 +40,6 @@ public class Hash {
         }
     }
     /*public static void main(String[] args) {
-        Hash a = new Hash("SHA-512");
-        System.out.println(a.calcularHash("cadena inicial abcaalgsrj"));}*/
+        Hash a = new Hash("SHA-256");
+        System.out.println(a.calcularHash("hola"));}*/
 }

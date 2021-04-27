@@ -32,7 +32,7 @@ public class Buscador {
             String hashActual = hash.calcularHash(cadenaInicial+combinacionesEncontradasDeTamañoEspecifico[i]);
 
             if(hashActual.startsWith(ceros)){
-                System.out.println(hashActual);
+                System.out.println("El hash encontrado que cumple la condición es: " + hashActual);
                 return combinacionesEncontradasDeTamañoEspecifico[i];
             }
         }
@@ -55,7 +55,7 @@ public class Buscador {
                     String hashActual = hash.calcularHash(cadenaConcatenada);
                     //System.out.println(hashActual);
                     if (hashActual.startsWith(ceros)) {
-                        System.out.println(hashActual);
+                        System.out.println("El hash encontrado que cumple la condición es: " + hashActual);
                         return nuevaCombinacion;
                     }
                     vectorTemporal.add(nuevaCombinacion);
