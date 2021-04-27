@@ -38,4 +38,7 @@ public class Hash {
             throw new RuntimeException(e);
         }
     }
+    /*public static void main(String[] args) {
+        Hash a = new Hash("SHA-512");
+        System.out.println(a.calcularHash("cadena inicial abcaalgsrj"));}*/
 }

@@ -29,7 +29,7 @@ public class Buscador {
         String[] combinacionesEncontradasDeTamañoEspecifico = abecedario;
         for(int i = 0; i < combinacionesEncontradasDeTamañoEspecifico.length; i++)
         {
-            String hashActual = hash.calcularHash(combinacionesEncontradasDeTamañoEspecifico[i] + cadenaInicial);
+            String hashActual = hash.calcularHash(cadenaInicial+combinacionesEncontradasDeTamañoEspecifico[i]);
 
             if(hashActual.startsWith(ceros)){
                 System.out.println(hashActual);
@@ -51,7 +51,7 @@ public class Buscador {
                 for (int k = 0; k < combinacionesEncontradasDeTamañoEspecifico.length; k++) {
                     // Generar todas las combinaciones de longitud z
                     String nuevaCombinacion = combinacionesEncontradasDeTamañoEspecifico[k] + abecedario[i];
-                    String cadenaConcatenada = nuevaCombinacion + cadenaInicial;
+                    String cadenaConcatenada = cadenaInicial + nuevaCombinacion;
                     String hashActual = hash.calcularHash(cadenaConcatenada);
                     //System.out.println(hashActual);
                     if (hashActual.startsWith(ceros)) {
