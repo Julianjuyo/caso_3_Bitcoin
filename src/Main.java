@@ -28,6 +28,7 @@ public class Main {
             System.out.println("La cadena usada es: " + cadena);
             System.out.println("Se tardó: "+ endTime +" minutos"+"\n");
 
+            
 
         } catch (IOException e) {
             e.printStackTrace();
