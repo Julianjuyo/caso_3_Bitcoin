@@ -17,9 +17,11 @@ public class Buscador {
     public String buscarCombinacionParaQueElHashCumplaLaCondicion(int cantidadDeCeros, String cadenaInicial){
 
         String ceros = "";
+        String cerosMasUno = "0";
 
         for(int i = 0; i < cantidadDeCeros/4; i++){
             ceros += "0";
+            cerosMasUno += "0";
         }
 
         //TODO Esta lista debe ser el abecedario completo. Está con 4 caracteres para poder hacer pruebas
@@ -31,7 +33,7 @@ public class Buscador {
         {
             String hashActual = hash.calcularHash(cadenaInicial+combinacionesEncontradasDeTamañoEspecifico[i]);
 
-            if(hashActual.startsWith(ceros)){
+            if(hashActual.startsWith(ceros) && !hashActual.startsWith(cerosMasUno)){
                 System.out.println("El hash encontrado que cumple la condición es: " + hashActual);
                 return combinacionesEncontradasDeTamañoEspecifico[i];
             }
@@ -54,7 +56,7 @@ public class Buscador {
                     String cadenaConcatenada = cadenaInicial + nuevaCombinacion;
                     String hashActual = hash.calcularHash(cadenaConcatenada);
                     //System.out.println(hashActual);
-                    if (hashActual.startsWith(ceros)) {
+                    if (hashActual.startsWith(ceros) && !hashActual.startsWith(cerosMasUno)) {
                         System.out.println("El hash encontrado que cumple la condición es: " + hashActual);
                         return nuevaCombinacion;
                     }
