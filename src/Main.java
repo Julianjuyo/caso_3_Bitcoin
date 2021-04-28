@@ -58,7 +58,7 @@ public class Main {
                 if(sSistemaOperativo.equals("Mac OS X"))
                     pathNuevoArchvio ="/Users/julianoliveros/Desktop/Pruebas-"+i+"-"+algoritmo+"-conCadena-"+cadena+".txt";
                 else
-                    pathNuevoArchvio ="home/ubuntu/caso_3_Bitcoin/docs/Pruebas-"+i+"-"+algoritmo+"-conCadena-"+cadena+".txt";
+                    pathNuevoArchvio ="/home/ubuntu/caso_3_Bitcoin/docs/Pruebas-"+i+"-"+algoritmo+"-conCadena-"+cadena+".txt";
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter(pathNuevoArchvio));
                 escribirEnArchvio(i,  cadena,  bw,  algoritmo);
