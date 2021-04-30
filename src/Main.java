@@ -26,10 +26,23 @@ public class Main {
             if(cadena.length()>32){
                 throw new Exception("Error la cadena tiene mas de 32 caracteres");
             }
+            char[] salesChars = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+
+
+            Buzon buzonDeCadenas = new Buzon();
 
 
             long startTime = System.currentTimeMillis();
+
             String v = new Buscador(new Hash(algoritmo)).buscarCombinacionParaQueElHashCumplaLaCondicion(cantidadDeCeros, cadena);
+
+            Generador2 generadorDeSales = new Generador2(buzonDeCadenas);
+
+            generadorDeSales.comenzarEjecucion(cantidadDeCeros,cadena,algoritmo);
+
+            generadorDeSales.calcularSales(0,salesChars);
+
+
             long endTime = System.currentTimeMillis() - startTime;
             System.out.println("La cadena (v) encontrada es: " + v);
             System.out.println("La cadena usada es: " + cadena);

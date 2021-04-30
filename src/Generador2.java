@@ -1,8 +1,16 @@
 public class Generador2 {
+
+    public static Buzon buzonCadenas;
+
     static char[] salesChars = new char[] {'a','a','a'};
     static int maximoIndiceAlQueMeHeDevuelto = salesChars.length-1;
+
     public static void main(String[] args) {
         calcularSales(0, salesChars);
+    }
+
+    public Generador2(Buzon pBuzonCadenas){
+        this.buzonCadenas= pBuzonCadenas;
     }
 
     // - - - - - - -
@@ -40,4 +48,24 @@ public class Generador2 {
             System.out.println(sal);
         }
     }
+
+    public String comenzarEjecucion(int pCantidadDeCeros,String pCadenaInicial, String pAlgoritmoHashImplementado){
+
+        String sal ="";
+        int numeroDeThreads=4;
+
+
+        for (int i = 0; i < numeroDeThreads ; i++) {
+            new BuscadorDeHash(pCantidadDeCeros,pCadenaInicial,pAlgoritmoHashImplementado,i);
+
+        }
+
+        calcularSales(0,salesChars);
+
+        
+
+        return sal;
+
+    }
+
 }

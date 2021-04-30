@@ -12,8 +12,10 @@ public class Hash {
 
 
     public Hash(String pAlgoritmoHashImplementado ){
+
         this.algoritmoHashImplementado=pAlgoritmoHashImplementado;
     }
+
 
     public String calcularHash(String PTextoACifrar) {
         int caracteres;
@@ -39,7 +41,4 @@ public class Hash {
             throw new RuntimeException(e);
         }
     }
-    /*public static void main(String[] args) {
-        Hash a = new Hash("SHA-256");
-        System.out.println(a.calcularHash("hola"));}*/
 }
