@@ -4,6 +4,8 @@ public class PruebaGeneradorSales {
         
         //Este for se encarga de sacar todas las combinaciones posibles de longitud i
         for(int i = 7; i>=1; i--){
+            //Por ahora, esta clase solamente cambia los valores dentro de los arrays sales, falta hacer los sysouts en los
+            //puntos convenientes para saber qué está pasando en cada paso del algoritmo.
             char[] sales = new char[i];
             for(int j = 0; j < i; j++){
                 sales[j] = 'a';
@@ -37,7 +39,7 @@ public class PruebaGeneradorSales {
     
     private static void combinarCaracteresDesdeElIndiceDadoEnAdelante(int i, char[] sales) {
         //En este punto tengo, por ejemplo {a,a,b,a,a}
-    
+        //TODO
         //Al final, acá, tengo, por ejemplo, {a,a,z,z,z}
     }
 }
