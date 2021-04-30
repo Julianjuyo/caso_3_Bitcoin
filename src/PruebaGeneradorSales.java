@@ -16,6 +16,7 @@ public class PruebaGeneradorSales {
     
     //Saca todas las combinaciones de tamaño k
     private static void calcularTodasLasCombinacioesDeTamanioDado(int k, char[] sales) {
+
         for(int j = k-1; j < 26; j++){
             sales[j]++;
         }
