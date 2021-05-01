@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println("\n"+"Por favor ingrese el algoritmo que desea utilizar (SHA-512 o SHA-256), la cantidad de ceros que desea que tenga al comienzo el hash que se buscará y la cadena inicial con la que se hará la prueba on maximo 32 caracteres");
+        System.out.println("\n"+"Por favor ingrese el algoritmo que desea utilizar (SHA-512 o SHA-256), la cantidad de ceros que desea que tenga al comienzo el hash que se buscará y la cadena inicial con la que se hará la prueba con maximo 32 caracteres");
         System.out.println("Los datos deben ser ingresados separados por comas");
         System.out.println("Por ejemplo: SHA-512,24,esta es la cadena inicial");
         InputStreamReader is= new InputStreamReader(System.in);
@@ -27,7 +27,6 @@ public class Main {
                 throw new Exception("Error la cadena tiene mas de 32 caracteres");
             }
             char[] salesChars = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-
 
             Buzon buzonDeCadenas = new Buzon();
 
