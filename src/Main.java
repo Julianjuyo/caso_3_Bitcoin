@@ -17,7 +17,7 @@ public class Main {
 
         String line = null;
         try {
-            line = "4,SHA-512,4,hola";//br.readLine();
+            line = "4,SHA-512,8,hola";//br.readLine();
             String[] split = line.split(",");
 
             int numeroDeThreads = Integer.parseInt(split[0]);
@@ -32,25 +32,29 @@ public class Main {
             if(cadena.length()>32){
                 throw new Exception("Error la cadena tiene mas de 32 caracteres");
             }
-            //char[] salesChars = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-
-            char[] salesChars = new char[] {'a','b'};
 
             Buzon buzonDeCadenas = new Buzon();
 
 
             long startTime = System.currentTimeMillis();
 
-            //String v ="wait";// new Buscador(new Hash(algoritmo)).buscarCombinacionParaQueElHashCumplaLaCondicion(cantidadDeCeros, cadena);
+            Estado estado = new Estado();
 
-            Generador2 generadorDeSales = new Generador2(buzonDeCadenas);
-            generadorDeSales.comenzarEjecucion(cantidadDeCeros,cadena,algoritmo,numeroDeThreads);
+            for (int i = 0; i < numeroDeThreads ; i++) {
+                BuscadorDeHash thread = new BuscadorDeHash(cantidadDeCeros,cadena,algoritmo,i, buzonDeCadenas,estado);
+                thread.start();
+            }
+
+            GeneradorSales generadorDeSales = new GeneradorSales(buzonDeCadenas,estado);
 
 
-            long endTime = System.currentTimeMillis() - startTime;
+
+/*          long endTime = System.currentTimeMillis() - startTime;
             System.out.println("La cadena (v) encontrada es: " + "v");
             System.out.println("La cadena usada es: " + cadena);
             System.out.println("Se tardó: "+ endTime +" milisegundos"+"\n");
+
+*/
 
 
         } catch (IOException e) {

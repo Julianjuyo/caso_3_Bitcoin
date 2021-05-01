@@ -6,63 +6,27 @@ public class Buzon {
 
     private ArrayList<String> lista;
     Object lleno, vacio;
+    private int capacidad;
 
 
     /**
      *
      */
     public Buzon() {
-        setLista(new ArrayList<String>());
+        lista = new ArrayList<String>();
+        this.capacidad = 3000000;
         vacio = new Object();
         lleno = new Object();
     }
 
-    /**
-     *
-     */
-    public void almacenarCadena(String cadenaConSalAlmacenada) {
-
-        //System.out.println("Entro a Almacenar Cadena "+ getLista().size());
-
-        boolean continuar = true;
-        while(continuar) {
-            synchronized (this) {
-
-                System.out.println("en la bolsa ENTRADA "+cadenaConSalAlmacenada);
-                getLista().add(cadenaConSalAlmacenada);
-                continuar = false;
-            }
-            if (continuar) {
-                Thread.yield();
-            }
-        }
-        synchronized (vacio) {
-            try {
-                vacio.notify();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    /**
-     *
-     * @return
-     */
     public String sacarCadena() {
-
-        System.out.println("Entro a sacar cadena "+ getLista().size());
-
         boolean continuar = true;
-        String CadenaRetirada = null;
+        String cadenaRetirada = null;
         while(continuar) {
             synchronized (this) {
-                if (getLista().size() > 0) {
-
-                    CadenaRetirada = getLista().remove(0);
-                    System.out.println("en la bolsa SALIDA"+CadenaRetirada);
+                if (lista.size() > 0) {
+                    cadenaRetirada = lista.remove(0);
+                    System.out.println("Sacar: "+lista.size());
                     continuar = false;
                 }
             }
@@ -85,15 +49,33 @@ public class Buzon {
                 e.printStackTrace();
             }
         }
-        return CadenaRetirada;
+        return cadenaRetirada;
     }
 
+    public void almacenarCadena(String cadena) {
 
-    public ArrayList<String> getLista() {
-        return lista;
-    }
+        boolean continuar = true;
+        while(continuar) {
+            synchronized (this) {
+                if (lista.size() < capacidad) {
+                    lista.add(cadena);
+                    System.out.println("almacenar: "+lista.size());
+                    continuar = false;
+                }
+            }
 
-    public void setLista(ArrayList<String> lista) {
-        this.lista = lista;
+            if (continuar) {
+                Thread.yield();
+            }
+        }
+
+        synchronized (vacio) {
+            try {
+                vacio.notify();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

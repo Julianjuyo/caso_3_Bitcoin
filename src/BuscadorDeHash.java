@@ -3,6 +3,7 @@
 public class BuscadorDeHash extends Thread {
 
     private Hash hash;
+    private Estado estado;
     private static int cantidadDeCeros;
     private static String cadenaInicial;
     public static Buzon buzonCadenas;
@@ -10,23 +11,21 @@ public class BuscadorDeHash extends Thread {
     private int id;
 
 
-    public BuscadorDeHash(int pCantidadDeCeros,String pCadenaInicial, String pAlgoritmoHashImplementado, int pId, Buzon pBuzonCadenas){
+    public BuscadorDeHash(int pCantidadDeCeros,String pCadenaInicial, String pAlgoritmoHashImplementado, int pId, Buzon pBuzonCadenas,Estado pEstado){
 
+        this.estado = pEstado;
         this.hash = new Hash(pAlgoritmoHashImplementado);
         this.cadenaInicial= pCadenaInicial;
         this.cantidadDeCeros= pCantidadDeCeros;
         this.yaSeEncontroCadena=false;
         this.id=pId;
         this.buzonCadenas = pBuzonCadenas;
-
     }
-
 
     public synchronized Boolean darEstado(){
-
         return yaSeEncontroCadena;
-
     }
+
 
     public void run() {
 
@@ -42,24 +41,18 @@ public class BuscadorDeHash extends Thread {
 
         while(!yaSeEncontroCadena){
 
-            int tamanoBuzo = buzonCadenas.getLista().size();
-            System.out.println(tamanoBuzo);
+            String cadenaObtenida = buzonCadenas.sacarCadena();
+            String hashActual = hash.calcularHash(cadenaInicial+cadenaObtenida);
 
+            System.out.println("El thread:"+id+"-" + cadenaObtenida);
 
+            if(hashActual.startsWith(ceros) && !hashActual.startsWith(cerosMasUno) ){
 
-            if(tamanoBuzo>0){
-                String cadenaObtenida = buzonCadenas.sacarCadena();
-                String hashActual = hash.calcularHash(cadenaInicial+cadenaObtenida);
-                System.out.println(id+"-"+hashActual);
-
-                if(hashActual.startsWith(ceros) && !hashActual.startsWith(cerosMasUno) ){
-                    System.out.println("El hash encontrado que cumple la condición es: " + hashActual);
-                    yaSeEncontroCadena= true;
-                }
+                System.out.println("El thread:"+id+" Encontrado que cumple la condición es: " + hashActual);
+                yaSeEncontroCadena= true;
+                estado.encontrarHash(cadenaObtenida,hashActual);
             }
 
-
         }
-
     }
 }
