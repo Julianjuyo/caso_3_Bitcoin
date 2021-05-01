@@ -9,6 +9,7 @@ public class Main {
                            "la cantidad de ceros que desea que tenga al comienzo el hash que se buscará y " +
                            "la cadena inicial con la que se hará la prueba on maximo 32 caracteres");
 
+
         System.out.println("Los datos deben ser ingresados separados por comas");
         System.out.println("Por ejemplo: 4,SHA-512,24,esta es la cadena inicial");
         //InputStreamReader is= new InputStreamReader(System.in);
@@ -34,7 +35,6 @@ public class Main {
             //char[] salesChars = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
             char[] salesChars = new char[] {'a','b'};
-
 
             Buzon buzonDeCadenas = new Buzon();
 
