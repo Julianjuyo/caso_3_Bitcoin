@@ -4,28 +4,23 @@ public class BuscadorDeHash extends Thread {
 
     private Hash hash;
     private Estado estado;
-    private static int cantidadDeCeros;
-    private static String cadenaInicial;
-    public static Buzon buzonCadenas;
-    private static Boolean yaSeEncontroCadena;
+    private int cantidadDeCeros;
+    private String cadenaInicial;
+    public Buzon buzonCadenas;
     private int id;
+    private long startTime;
 
 
-    public BuscadorDeHash(int pCantidadDeCeros,String pCadenaInicial, String pAlgoritmoHashImplementado, int pId, Buzon pBuzonCadenas,Estado pEstado){
+    public BuscadorDeHash(int pCantidadDeCeros,String pCadenaInicial, String pAlgoritmoHashImplementado, int pId, Buzon pBuzonCadenas,Estado pEstado,long startTime){
 
         this.estado = pEstado;
         this.hash = new Hash(pAlgoritmoHashImplementado);
         this.cadenaInicial= pCadenaInicial;
         this.cantidadDeCeros= pCantidadDeCeros;
-        this.yaSeEncontroCadena=false;
+        this.startTime= startTime;
         this.id=pId;
         this.buzonCadenas = pBuzonCadenas;
     }
-
-    public synchronized Boolean darEstado(){
-        return yaSeEncontroCadena;
-    }
-
 
     public void run() {
 
@@ -37,22 +32,22 @@ public class BuscadorDeHash extends Thread {
             cerosMasUno += "0";
         }
 
-        System.out.println("entro a thread" +id);
+        //System.out.println("entro a thread" +id);
 
-        while(!yaSeEncontroCadena){
+        while(!estado.darYaEncontreUnHashQueSirve()){
 
             String cadenaObtenida = buzonCadenas.sacarCadena();
             String hashActual = hash.calcularHash(cadenaInicial+cadenaObtenida);
-
-            System.out.println("El thread:"+id+"-" + cadenaObtenida);
+            //System.out.println("El thread:"+id+"-" + cadenaObtenida);
 
             if(hashActual.startsWith(ceros) && !hashActual.startsWith(cerosMasUno) ){
-
                 System.out.println("El thread:"+id+" Encontrado que cumple la condición es: " + hashActual);
-                yaSeEncontroCadena= true;
+                System.out.println("La cadena (v) encontrada es: " + cadenaObtenida);
+                System.out.println("La cadena usada es: " + cadenaInicial);
+                long endTime = System.currentTimeMillis() - startTime;
+                System.out.println("Se tardó: "+ endTime +" milisegundos"+"\n");
                 estado.encontrarHash(cadenaObtenida,hashActual);
             }
-
         }
     }
 }

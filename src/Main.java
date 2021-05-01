@@ -17,7 +17,7 @@ public class Main {
 
         String line = null;
         try {
-            line = "4,SHA-512,8,hola";//br.readLine();
+            line = "16,SHA-512,28,buildtddarchs";//br.readLine();
             String[] split = line.split(",");
 
             int numeroDeThreads = Integer.parseInt(split[0]);
@@ -33,15 +33,15 @@ public class Main {
                 throw new Exception("Error la cadena tiene mas de 32 caracteres");
             }
 
-            Buzon buzonDeCadenas = new Buzon();
-
 
             long startTime = System.currentTimeMillis();
 
             Estado estado = new Estado();
 
+            Buzon buzonDeCadenas = new Buzon(estado);
+
             for (int i = 0; i < numeroDeThreads ; i++) {
-                BuscadorDeHash thread = new BuscadorDeHash(cantidadDeCeros,cadena,algoritmo,i, buzonDeCadenas,estado);
+                BuscadorDeHash thread = new BuscadorDeHash(cantidadDeCeros,cadena,algoritmo,i,buzonDeCadenas,estado,startTime);
                 thread.start();
             }
 
