@@ -12,7 +12,7 @@ public class Buzon {
      *
      */
     public Buzon() {
-        lista = new ArrayList<String>();
+        setLista(new ArrayList<String>());
         vacio = new Object();
         lleno = new Object();
     }
@@ -22,12 +22,15 @@ public class Buzon {
      */
     public void almacenarCadena(String cadenaConSalAlmacenada) {
 
+        //System.out.println("Entro a Almacenar Cadena "+ getLista().size());
+
         boolean continuar = true;
         while(continuar) {
             synchronized (this) {
 
-                    lista.add(cadenaConSalAlmacenada);
-                    continuar = false;
+                System.out.println("en la bolsa ENTRADA "+cadenaConSalAlmacenada);
+                getLista().add(cadenaConSalAlmacenada);
+                continuar = false;
             }
             if (continuar) {
                 Thread.yield();
@@ -49,12 +52,17 @@ public class Buzon {
      * @return
      */
     public String sacarCadena() {
+
+        System.out.println("Entro a sacar cadena "+ getLista().size());
+
         boolean continuar = true;
         String CadenaRetirada = null;
         while(continuar) {
             synchronized (this) {
-                if (lista.size() > 0) {
-                    CadenaRetirada = lista.remove(0);
+                if (getLista().size() > 0) {
+
+                    CadenaRetirada = getLista().remove(0);
+                    System.out.println("en la bolsa SALIDA"+CadenaRetirada);
                     continuar = false;
                 }
             }
@@ -80,4 +88,12 @@ public class Buzon {
         return CadenaRetirada;
     }
 
+
+    public ArrayList<String> getLista() {
+        return lista;
+    }
+
+    public void setLista(ArrayList<String> lista) {
+        this.lista = lista;
+    }
 }

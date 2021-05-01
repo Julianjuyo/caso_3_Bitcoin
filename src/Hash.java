@@ -41,4 +41,20 @@ public class Hash {
             throw new RuntimeException(e);
         }
     }
+
+/*    public static void main(String[] args) {
+
+        long startTime = System.currentTimeMillis();
+        Hash a = new Hash("SHA-512");
+        System.out.println(a.calcularHash("cadena inicial acbalgsrj"));
+        long endTime = System.currentTimeMillis() - startTime;
+        System.out.println(endTime);
+
+        startTime = System.currentTimeMillis();
+        a = new Hash("SHA-256");
+        System.out.println(a.calcularHash("cadena inicial acbalgsrj"));
+        endTime = System.currentTimeMillis() - startTime;
+        System.out.println(endTime);
+    }*/
+
 }

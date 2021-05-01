@@ -1,13 +1,14 @@
 public class Generador2 {
 
     public static Buzon buzonCadenas;
+    String salEncontrada ="";
 
     static char[] salesChars = new char[] {'a','a','a'};
     static int maximoIndiceAlQueMeHeDevuelto = salesChars.length-1;
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         calcularSales(0, salesChars);
-    }
+    }*/
 
     public Generador2(Buzon pBuzonCadenas){
         this.buzonCadenas= pBuzonCadenas;
@@ -15,7 +16,7 @@ public class Generador2 {
 
     // - - - - - - -
     public static void calcularSales(int i, char[] sales){
-        for (int k = 0; k < 25; k++) {
+        for (int k = 0; k < 3; k++) {
 
             if(i!=sales.length-1) {
                 calcularSales(i + 1, sales);
@@ -37,7 +38,10 @@ public class Generador2 {
                 for (int s = maximoIndiceAlQueMeHeDevuelto; s < sales.length; s++) {
                     sal += sales[s];
                 }
-                System.out.println(sal);
+                //System.out.println(sal);
+                //System.out.println(" Generador tamano antes primer "+buzonCadenas.getLista().size());
+                buzonCadenas.almacenarCadena(sal);
+                //System.out.println("Generador tamano despues primer "+buzonCadenas.getLista().size());
             }
             sales[i]++;
 
@@ -45,26 +49,33 @@ public class Generador2 {
             for(int s = maximoIndiceAlQueMeHeDevuelto; s < sales.length; s++){
                 sal += sales[s];
             }
-            System.out.println(sal);
+            //System.out.println(sal);
+            //System.out.println("Generador tamano antes Segundo "+buzonCadenas.getLista().size());
+            buzonCadenas.almacenarCadena(sal);
+            //System.out.println("Generador tamano despues Segundo "+buzonCadenas.getLista().size());
+
         }
     }
 
-    public String comenzarEjecucion(int pCantidadDeCeros,String pCadenaInicial, String pAlgoritmoHashImplementado){
-
-        String sal ="";
-        int numeroDeThreads=4;
+    public String comenzarEjecucion(int pCantidadDeCeros,String pCadenaInicial, String pAlgoritmoHashImplementado, int numeroDeThreads){
 
 
         for (int i = 0; i < numeroDeThreads ; i++) {
-            new BuscadorDeHash(pCantidadDeCeros,pCadenaInicial,pAlgoritmoHashImplementado,i);
-
+            System.out.println("corre los threads");
+            BuscadorDeHash thread = new BuscadorDeHash(pCantidadDeCeros,pCadenaInicial,pAlgoritmoHashImplementado,i, buzonCadenas);
+            thread.start();
         }
 
+        System.out.println("Emepzó calcular sales");
         calcularSales(0,salesChars);
+        System.out.println("Termino calcular sales");
 
-        
 
-        return sal;
+
+
+
+
+        return salEncontrada;
 
     }
 

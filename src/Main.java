@@ -4,20 +4,25 @@ import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println("\n"+"Por favor ingrese el algoritmo que desea utilizar (SHA-512 o SHA-256), la cantidad de ceros que desea que tenga al comienzo el hash que se buscará y la cadena inicial con la que se hará la prueba on maximo 32 caracteres");
+        System.out.println("\n"+"Por favor ingrese numero de thread que desea crear, " +
+                           "el algoritmo que desea utilizar (SHA-512 o SHA-256), " +
+                           "la cantidad de ceros que desea que tenga al comienzo el hash que se buscará y " +
+                           "la cadena inicial con la que se hará la prueba on maximo 32 caracteres");
+
         System.out.println("Los datos deben ser ingresados separados por comas");
-        System.out.println("Por ejemplo: SHA-512,24,esta es la cadena inicial");
-        InputStreamReader is= new InputStreamReader(System.in);
-        BufferedReader br = new BufferedReader(is);
+        System.out.println("Por ejemplo: 4,SHA-512,24,esta es la cadena inicial");
+        //InputStreamReader is= new InputStreamReader(System.in);
+        //BufferedReader br = new BufferedReader(is);
 
         String line = null;
         try {
-            line = br.readLine();
+            line = "4,SHA-512,4,hola";//br.readLine();
             String[] split = line.split(",");
 
-            String algoritmo = split[0];
-            int cantidadDeCeros = Integer.parseInt(split[1]);
-            String cadena = split[2];
+            int numeroDeThreads = Integer.parseInt(split[0]);
+            String algoritmo = split[1];
+            int cantidadDeCeros = Integer.parseInt(split[2]);
+            String cadena = split[3];
             
             if(!(algoritmo.equals("SHA-256")||algoritmo.equals("SHA-512"))){
                 throw new Exception("El algoritmo ingresado no es válido");
@@ -26,7 +31,9 @@ public class Main {
             if(cadena.length()>32){
                 throw new Exception("Error la cadena tiene mas de 32 caracteres");
             }
-            char[] salesChars = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+            //char[] salesChars = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+
+            char[] salesChars = new char[] {'a','b'};
 
 
             Buzon buzonDeCadenas = new Buzon();
@@ -34,17 +41,14 @@ public class Main {
 
             long startTime = System.currentTimeMillis();
 
-            String v = new Buscador(new Hash(algoritmo)).buscarCombinacionParaQueElHashCumplaLaCondicion(cantidadDeCeros, cadena);
+            //String v ="wait";// new Buscador(new Hash(algoritmo)).buscarCombinacionParaQueElHashCumplaLaCondicion(cantidadDeCeros, cadena);
 
             Generador2 generadorDeSales = new Generador2(buzonDeCadenas);
-
-            generadorDeSales.comenzarEjecucion(cantidadDeCeros,cadena,algoritmo);
-
-            generadorDeSales.calcularSales(0,salesChars);
+            generadorDeSales.comenzarEjecucion(cantidadDeCeros,cadena,algoritmo,numeroDeThreads);
 
 
             long endTime = System.currentTimeMillis() - startTime;
-            System.out.println("La cadena (v) encontrada es: " + v);
+            System.out.println("La cadena (v) encontrada es: " + "v");
             System.out.println("La cadena usada es: " + cadena);
             System.out.println("Se tardó: "+ endTime +" milisegundos"+"\n");
 
