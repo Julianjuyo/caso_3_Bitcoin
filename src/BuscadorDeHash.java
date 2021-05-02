@@ -1,17 +1,17 @@
-import javax.swing.*;
+
 import java.io.*;
 
 
 public class BuscadorDeHash extends Thread {
 
-    private Hash hash;
-    private Estado estado;
-    private int cantidadDeCeros;
-    private String cadenaInicial;
-    public Buzon buzonCadenas;
-    private String algoritmoHashImplementado;
-    private int id;
-    private long startTime;
+    private final Hash hash;
+    private final Estado estado;
+    private final int cantidadDeCeros;
+    private final String cadenaInicial;
+    public final Buzon buzonCadenas;
+    private final String algoritmoHashImplementado;
+    private final int id;
+    private final long startTime;
 
 
     public BuscadorDeHash(int pCantidadDeCeros,String pCadenaInicial, String pAlgoritmoHashImplementado, int pId, Buzon pBuzonCadenas,Estado pEstado,long startTime){
