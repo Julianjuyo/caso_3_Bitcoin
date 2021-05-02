@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println("\n"+"Por favor ingrese numero de thread que desea crear, " +
+        System.out.println("\n"+"Por favor ingrese numero de hilos de ejecución que desea crear," +
                            "el algoritmo que desea utilizar (SHA-512 o SHA-256), " +
                            "la cantidad de ceros que desea que tenga al comienzo el hash que se buscará y " +
                            "la cadena inicial con la que se hará la prueba on maximo 32 caracteres");
@@ -12,12 +12,12 @@ public class Main {
 
         System.out.println("Los datos deben ser ingresados separados por comas");
         System.out.println("Por ejemplo: 4,SHA-512,24,esta es la cadena inicial");
-        //InputStreamReader is= new InputStreamReader(System.in);
-        //BufferedReader br = new BufferedReader(is);
+        InputStreamReader is= new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(is);
 
         String line = null;
         try {
-            line = "16,SHA-512,28,buildtddarchs";//br.readLine();
+            line = br.readLine();
             String[] split = line.split(",");
 
             int numeroDeThreads = Integer.parseInt(split[0]);
@@ -35,27 +35,14 @@ public class Main {
 
 
             long startTime = System.currentTimeMillis();
-
             Estado estado = new Estado();
-
             Buzon buzonDeCadenas = new Buzon(estado);
 
             for (int i = 0; i < numeroDeThreads ; i++) {
                 BuscadorDeHash thread = new BuscadorDeHash(cantidadDeCeros,cadena,algoritmo,i,buzonDeCadenas,estado,startTime);
                 thread.start();
             }
-
             GeneradorSales generadorDeSales = new GeneradorSales(buzonDeCadenas,estado);
-
-
-
-/*          long endTime = System.currentTimeMillis() - startTime;
-            System.out.println("La cadena (v) encontrada es: " + "v");
-            System.out.println("La cadena usada es: " + cadena);
-            System.out.println("Se tardó: "+ endTime +" milisegundos"+"\n");
-
-*/
-
 
         } catch (IOException e) {
             e.printStackTrace();
