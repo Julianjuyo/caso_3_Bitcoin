@@ -34,7 +34,7 @@ public class BuscadorDeHash extends Thread {
 
             //Se verifica el sistema operativo donde se corre
             if(sSistemaOperativo.equals("Mac OS X"))
-                pathNuevoArchvio ="/Users/julianoliveros/Desktop/Pruebas-"+id+"-"+algoritmoHashImplementado+"-conCadena-"+cadenaInicial+".txt";
+                pathNuevoArchvio ="/Users/julianoliveros/Desktop/Pruebas-"+id+"con-"+cantidadDeCeros+"-ceros-"+algoritmoHashImplementado+"-conCadena-"+cadenaInicial+".txt";
             else if(sSistemaOperativo.equals("Windows 10"))
                 pathNuevoArchvio ="C:\\Pruebas-"+id+"-"+algoritmoHashImplementado+"-conCadena-"+cadenaInicial+".txt";
             else

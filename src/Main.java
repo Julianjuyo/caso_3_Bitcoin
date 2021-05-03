@@ -44,6 +44,7 @@ public class Main {
             }
             GeneradorSales generadorDeSales = new GeneradorSales(buzonDeCadenas,estado);
 
+
         } catch (IOException e) {
             e.printStackTrace();
         }
