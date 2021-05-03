@@ -4,7 +4,7 @@ public class GeneradorSales {
     private final Estado estado;
 
 
-    char[] salesChars = new char[] {'a','a','a','a','a','a','a'};
+    char[] salesChars = new char[] {'a'};
 
     private int maximoIndiceAlQueMeHeDevuelto = salesChars.length-1;
 

@@ -71,15 +71,7 @@ public class BuscadorDeHash extends Thread {
         }
     }
 
-    public void run() {
-
-        String ceros = "";
-        String cerosMasUno = "0";
-
-        for(int i = 0; i < cantidadDeCeros/4; i++){
-            ceros += "0";
-            cerosMasUno += "0";
-        }
+    public void run(){
 
         //System.out.println("entro a thread" +id);
 
@@ -89,7 +81,7 @@ public class BuscadorDeHash extends Thread {
             String hashActual = hash.calcularHash(cadenaInicial+cadenaObtenida);
             //System.out.println("El thread:"+id+"-" + cadenaObtenida);
 
-            if(hashActual.startsWith(ceros) && !hashActual.startsWith(cerosMasUno) ){
+            if(hashActual.equals("e8b0a51e4474cc6fe0beacfab2018453c1299ef46d767e12a414218c52ecd7cdd329c7d48a1b4927edf9978159f1bc442f7af21a2aa60f082e53bce636b8857d")){
 
                 long endTime = System.currentTimeMillis() - startTime;
 

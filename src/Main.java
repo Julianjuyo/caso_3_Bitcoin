@@ -15,6 +15,9 @@ public class Main {
         InputStreamReader is= new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(is);
 
+        //aaaaabaaaaabaaaaabaaaaabaaaaabbb
+
+        //1,SHA-512,4,aaaaabaaaaabaaaaabaaaaabaaaaabbb
         String line = null;
         try {
             line = br.readLine();
